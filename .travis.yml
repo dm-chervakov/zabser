@@ -7,8 +7,7 @@ install:
         - docker build -t zabbix-server .
 
 script:
-        - docker run -d -p 127.0.0.1:7777:80 zabbix-server \
-          && curl 127.0.0.1:7777/zabbix > /dev/null
+        - docker run -d -p 127.0.0.1:7777:80 zabbix-server && curl 127.0.0.1:7777/zabbix > /dev/null
 
 after_success:
         - test "$TRAVIS_BRANCH" = "master" && deploy_dockerhub.sh
