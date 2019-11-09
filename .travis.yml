@@ -3,7 +3,7 @@ dist: xenial
 services:
         - docker
 
-install:
+script:
         - docker build -t zabbix-server .
 
 after_success:
