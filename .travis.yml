@@ -1,0 +1,18 @@
+dist: xenial
+
+services:
+        - docker
+
+install:
+        - docker build -t zabbix-server .
+
+script:
+        - docker run -d -p 127.0.0.1:7777:80 zabbix-server \
+          && curl 127.0.0.1:7777/zabbix > /dev/null
+
+after_success:
+        - test "$TRAVIS_BRANCH" = "master"
+        after_success:
+                - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                - docker tag zabbix-server $DOCKER_USER/zabbix-server
+                - docker push $DOCKER_USER/zabbix-server
