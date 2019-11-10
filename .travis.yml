@@ -1,10 +1,13 @@
+env:
+  - DOCKER_NAME_IMAGE=zabbix-t2
+
 sudo: required
 
 services:
   - docker
 
 script:
-  - docker build -t zabser .
+  - docker build -t DOCKER_NAME_IMAGE .
 
 after_success:
   - test “$TRAVIS_BRANCH” = “master” && sh .travis/deploy_dockerhub.sh
