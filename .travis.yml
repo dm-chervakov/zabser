@@ -1,13 +1,11 @@
-dist: xenial
+sudo: required
 
 services:
-        - docker
+  - docker
 
 script:
-        - docker build -t zabbix-server .
+  - docker build -t zabser .
 
-deploy:
-        provider: script
-        script: bash deploy_dockerhub.sh
-        on:
-                branch: master
+after_success:
+  - test “$TRAVIS_BRANCH” = “master” && sh .travis/deploy_dockerhub.sh
+
