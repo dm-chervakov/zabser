@@ -1,3 +1,5 @@
+env:
+  - DOCKER_NAME_IMAGE=zabser-t1
 
 sudo: required
 
@@ -5,7 +7,7 @@ services:
   - docker
 
 script:
-  - docker build -t "$DOCKER_NAME_IMAGE" .
+  - docker build -t $DOCKER_NAME_IMAGE .
 
 after_success:
   - test “$TRAVIS_BRANCH” = “master” && sh .travis/deploy_dockerhub.sh
