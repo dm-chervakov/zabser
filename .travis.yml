@@ -8,7 +8,9 @@ services:
 
 script:
   - docker build -t $DOCKER_NAME_IMAGE .
+  - docker run -d -p 127.0.0.1:7777:80 $DOCKER_NAME_IMAGE
+  - curl -Is 127.0.0.1:7777
 
-after_success:
-  - test “$TRAVIS_BRANCH” = “master” && sh .travis/deploy_dockerhub.sh
+    #after_success:
+    #  - test “$TRAVIS_BRANCH” = “master” && sh .travis/deploy_dockerhub.sh
 
