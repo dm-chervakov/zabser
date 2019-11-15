@@ -9,6 +9,8 @@ services:
 script:
   - docker build -t $DOCKER_NAME_IMAGE .
   - docker run -d -p 127.0.0.1:7777:80 $DOCKER_NAME_IMAGE
+  - sleep 10
+  - docker ps
   - curl -Is 127.0.0.1:7777
 
     #after_success:
